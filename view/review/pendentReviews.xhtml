@@ -1,0 +1,34 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="../layout/template.xhtml">
+
+    <ui:define name="body">
+
+        <rich:panel>
+        <rich:dataTable value="#{reviews}" var="r" rows="5">
+	        <f:facet name="header">
+                <h:outputText value="Pendent Reviews" />
+           </f:facet>
+           <rich:column>
+              <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{r.bugReport.id}"/>
+             </rich:column>
+             <rich:column >
+               <f:facet name="header">Short Description</f:facet>
+               <h:outputText value="#{r.bugReport.description}"/>
+             </rich:column>
+             <rich:column>
+                <f:facet name="header">URL</f:facet>
+                <h:outputText value="#{r.bugReport.url}"/>
+             </rich:column>
+          </rich:dataTable>	
+        
+        </rich:panel>
+    </ui:define>
+</ui:composition>

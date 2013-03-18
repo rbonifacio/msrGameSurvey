@@ -18,7 +18,16 @@
     </page>
     
     <page view-id="/review/pendentReviews.xhtml">
-    	
+    	<end-conversation before-redirect="true"/>
+    	<navigation>
+    		<rule if-outcome="reviewBugReport">
+    			<redirect view-id="/review/reviewBugReport.xhtml" />
+    		</rule>
+    	</navigation>
+    </page>
+    
+    <page view-id="/review/reviewBugReport.xhtml">
+    	<begin-conversation join="true"/>
     </page>
 
     <exception class="org.jboss.seam.framework.EntityNotFoundException">

@@ -1,6 +1,9 @@
 package br.cic.unb.msr.survey.action;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.model.SelectItem;
 
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
@@ -12,6 +15,7 @@ import org.jboss.seam.annotations.datamodel.DataModel;
 import org.jboss.seam.annotations.datamodel.DataModelSelection;
 
 import br.cic.unb.msr.survey.controller.Facade;
+import br.cic.unb.msr.survey.model.BugCategory;
 import br.cic.unb.msr.survey.model.Review;
 import br.cic.unb.msr.survey.model.User;
 
@@ -29,12 +33,45 @@ public class ReviewAction {
 	private List<Review> reviews;
 	
 	@DataModelSelection
-	@Out(required=false)
+	@Out(required=false, scope=ScopeType.CONVERSATION)
 	private Review selectedReview;
+	
+	private Long selectedCategoryId;
+	
+	@Out(required=false, scope=ScopeType.CONVERSATION)
+	private Review submittedReview;
 
 	@Factory("reviews")
 	public void retrievePendentReviews() {
 		reviews = facade.pendentReviews(loggedUser.getId());
+	}
+	
+	public String reviewBugReport() {
+		submittedReview = selectedReview;
+		
+		selectedCategoryId = submittedReview.getCategory() == null ? null : submittedReview.getCategory().getId();
+		return "reviewBugReport";
+	}
+	
+	public List<SelectItem> listCategories() {
+		List<BugCategory> categories = facade.listCategories();
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		for (BugCategory c: categories) {
+			SelectItem item = new SelectItem();
+			item.setLabel(c.getCategory());
+			item.setValue(c.getId()); //this is not the best option, but works without a big effort.
+			items.add(item);
+		}
+		return items; 
+	}
+	
+	public String review() {
+		BugCategory c = facade.findCategoryById(selectedCategoryId);
+		submittedReview.setCategory(c);
+		submittedReview.setReviewed(true);
+		facade.updateReview(submittedReview);
+		reviews = facade.pendentReviews(loggedUser.getId());
+		return "pendentReviews";
 	}
 
 	public User getLoggedUser() {
@@ -68,6 +105,13 @@ public class ReviewAction {
 	public void setSelectedReview(Review selectedReview) {
 		this.selectedReview = selectedReview;
 	}
-	
+
+	public void setSelectedCategoryId(Long selectedCategoryId) {
+		this.selectedCategoryId = selectedCategoryId;
+	}
+
+	public Long getSelectedCategoryId() {
+		return selectedCategoryId;
+	}
 	
 }

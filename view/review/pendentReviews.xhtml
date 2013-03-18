@@ -6,12 +6,14 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
+    xmlns:a="http://richfaces.org/a4j"
     template="../layout/template.xhtml">
 
     <ui:define name="body">
-
+	<h:form id="registerActionForm">
         <rich:panel>
-        <rich:dataTable value="#{reviews}" var="r" rows="5">
+        <rich:datascroller for="reviewData" />
+        <rich:dataTable id="reviewData" value="#{reviews}" var="r" rows="10">
 	        <f:facet name="header">
                 <h:outputText value="Pendent Reviews" />
            </f:facet>
@@ -27,8 +29,12 @@
                 <f:facet name="header">URL</f:facet>
                 <h:outputText value="#{r.bugReport.url}"/>
              </rich:column>
+			<rich:column>
+				<h:commandLink action="#{reviewAction.reviewBugReport()}" value="Review" />
+			</rich:column>           
           </rich:dataTable>	
-        
+          
         </rich:panel>
+        </h:form>
     </ui:define>
 </ui:composition>

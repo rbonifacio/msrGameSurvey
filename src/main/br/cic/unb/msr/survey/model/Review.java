@@ -28,19 +28,22 @@ public class Review {
 	private BugCategory category;
 	
 	@Column(name="ATTACHMENT",nullable=true)
-	@Enumerated(EnumType.ORDINAL)
-	private BooleanReview attachment;
+	private Boolean attachment;
 	
 	@Column(name="ENUMERATION", nullable=true)
-	@Enumerated(EnumType.ORDINAL)
-	private BooleanReview enumeration;
+	private Boolean enumeration;
 	
 	@Column(name="SOURCE_CODE", nullable=true)
-	@Enumerated(EnumType.ORDINAL)
-	private BooleanReview sourceCode;
+	private Boolean sourceCode;
 	
 	@Column(name="REVIWED", nullable=true)
 	private Boolean reviewed; 
+	
+	public Review() {
+		enumeration = false;
+		attachment = false; 
+		sourceCode = false; 
+	}
 
 	public ReviewId getId() {
 		return id;
@@ -58,27 +61,29 @@ public class Review {
 		this.category = category;
 	}
 
-	public BooleanReview getAttachment() {
+	public Boolean getAttachment() {
 		return attachment;
 	}
 
-	public void setAttachment(BooleanReview attachment) {
+	
+	public void setAttachment(Boolean attachment) {
 		this.attachment = attachment;
 	}
 
-	public BooleanReview getEnumeration() {
+	public Boolean getEnumeration() {
 		return enumeration;
 	}
 
-	public void setEnumeration(BooleanReview enumeration) {
+	
+	public void setEnumeration(Boolean enumeration) {
 		this.enumeration = enumeration;
 	}
 
-	public BooleanReview getSourceCode() {
+	public Boolean getSourceCode() {
 		return sourceCode;
 	}
 
-	public void setSourceCode(BooleanReview sourceCode) {
+	public void setSourceCode(Boolean sourceCode) {
 		this.sourceCode = sourceCode;
 	}
 

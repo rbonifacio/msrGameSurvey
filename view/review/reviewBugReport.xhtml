@@ -1,0 +1,37 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="../layout/template.xhtml">
+
+    <ui:define name="body">
+        <rich:panel>
+        	<h:form id="loginForm">
+            	<h:panelGrid columns="2">
+               		<h:outputLabel for="bugReport">Bug Report</h:outputLabel>
+            		<h:inputText id="bugReport" value="#{submittedReview.bugReport.id}" readonly="true"/>
+            		<h:outputLabel for="shortDescription">Short Description</h:outputLabel>
+            		<h:inputText id="shortDescription" value="#{submittedReview.bugReport.shortDescription}" readonly="true"/>
+            		<h:outputLabel for="description">Description</h:outputLabel>
+            		<h:inputText id="description" value="#{submittedReview.bugReport.description}" readonly="true"/>
+            		<h:outputLabel for="enumeration">Enumeration</h:outputLabel>
+            		<h:selectBooleanCheckbox id="enumeration" value="#{submittedReview.enumeration}"/>
+            		<h:outputLabel for="sourceCode">Source code sample</h:outputLabel>
+            		<h:selectBooleanCheckbox id="sourceCode" value="#{submittedReview.sourceCode}"/>
+            		<h:outputLabel for="attachment">Attachment</h:outputLabel>
+            		<h:selectBooleanCheckbox id="attachment" value="#{submittedReview.attachment}"/>
+            		<h:outputLabel for="attachment">Category</h:outputLabel>
+            		<h:selectOneMenu value="#{reviewAction.selectedCategoryId}">
+            			<f:selectItems value="#{reviewAction.listCategories()}"  />
+            		</h:selectOneMenu>
+            	</h:panelGrid>
+            	<h:commandButton id="submit" value="Review" action="#{reviewAction.review()}"/>
+            </h:form>
+        </rich:panel>
+
+    </ui:define>
+</ui:composition>

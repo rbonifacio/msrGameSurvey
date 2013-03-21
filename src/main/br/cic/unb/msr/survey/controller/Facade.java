@@ -22,6 +22,10 @@ public class Facade {
 		return entityManager.createQuery("FROM Review r where r.reviewed = 'FALSE' and r.user.id = :pId").setParameter("pId", userId).getResultList();
 	}
 	
+	public List<Review> concludedReviews(Long userId) {
+		return entityManager.createQuery("FROM Review r where r.reviewed = 'TRUE' and r.user.id = :pId").setParameter("pId", userId).getResultList();
+	}
+	
 	public List<BugCategory> listCategories() {
 		return entityManager.createQuery("FROM BugCategory c").getResultList();
 	}

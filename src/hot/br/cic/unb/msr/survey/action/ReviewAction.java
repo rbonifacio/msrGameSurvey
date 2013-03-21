@@ -46,11 +46,23 @@ public class ReviewAction {
 		reviews = facade.pendentReviews(loggedUser.getId());
 	}
 	
+	
+	public String browseToConcludedReviews() {
+		return "concludedReviews";
+	}
+	
+	public String browseToPendentReviews() {
+		return "pendentReviews";
+	}
 	public String reviewBugReport() {
 		submittedReview = selectedReview;
 		
 		selectedCategoryId = submittedReview.getCategory() == null ? null : submittedReview.getCategory().getId();
 		return "reviewBugReport";
+	}
+	
+	public List<Review> concludedReviews() {
+		return facade.concludedReviews(loggedUser.getId());
 	}
 	
 	public List<SelectItem> listCategories() {

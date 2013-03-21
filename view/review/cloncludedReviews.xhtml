@@ -13,9 +13,9 @@
 	<h:form id="registerActionForm">
         <rich:panel>
         <rich:datascroller for="reviewData" />
-        <rich:dataTable id="reviewData" value="#{reviews}" var="r" rows="10">
+        <rich:dataTable id="reviewData" value="#{reviewAction.concludedReviews()}" var="r" rows="10">
 	        <f:facet name="header">
-                <h:outputText value="Pendent Reviews" />
+                <h:outputText value="Concluded Reviews" />
            </f:facet>
            <rich:column>
               <f:facet name="header">Id</f:facet>
@@ -28,12 +28,9 @@
              <rich:column>
                 <f:facet name="header">URL</f:facet>
                 <h:outputText value="#{r.bugReport.url}"/>
-             </rich:column>
-			<rich:column>
-				<h:commandLink action="#{reviewAction.reviewBugReport()}" value="Review" />
-			</rich:column>           
+             </rich:column>           
           </rich:dataTable>	
-         <h:commandButton id="concludedReviews" value="Concluded reviews" action="#{reviewAction.browseToConcludedReviews()}"/> 
+          <h:commandButton id="pendentReviews" value="Pendent reviews" action="#{reviewAction.browseToPendentReviews()}"/> 
         </rich:panel>
         </h:form>
     </ui:define>

@@ -28,10 +28,6 @@
             		<h:selectOneMenu value="#{reviewAction.selectedCategoryId}">
             			<f:selectItems value="#{reviewAction.listCategories()}"  />
             		</h:selectOneMenu>
-            		<h:outputLink id="details" value="#{submittedReview.bugReport.url}">
-            			Click here for details
-            		</h:outputLink> 
-            		
             	</h:panelGrid>
             	<h:commandButton id="submit" value="Review" action="#{reviewAction.review()}"/>
             </h:form>

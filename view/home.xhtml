@@ -10,12 +10,18 @@
 
     <ui:define name="body">
 
-        <h1>Welcome to Seam!</h1>
-        <rich:panel>
+        <h1>Welcome to the MSR Game Survey on Bug Reports. Thanks for contributing</h1>
+        <h:form id="formBrowse">
+        <rich:panel rendered="#{identity.loggedIn}">
+        	 <h:commandButton id="concludedReviews" value="Concluded reviews" action="#{reviewAction.browseToConcludedReviews()}"/>
+        	 <h:commandButton id="pendentReviews" value="Pendent reviews" action="#{reviewAction.browseToPendentReviews()}"/>
+        </rich:panel>
+        </h:form>
+        <rich:panel rendered="#{not identity.loggedIn}">
             <h:panelGrid columns="2">
                 <h:graphicImage value="/img/seamlogo.png" alt="Seam logo"/>
                 <s:div styleClass="info">
-                    <p><strong>Your seam-gen project is deployed!</strong> Here are some of the features this project provides:</p>
+                    <p><strong>This project has been build with SEAM</strong> Here are some of the features this project provides:</p>
                     <ul class="bullets">
                         <li>Ant build script</li>
                         <li>Deployment to JBoss AS (EAR or WAR)</li>
